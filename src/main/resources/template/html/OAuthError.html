@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:text="#{headline}">This is title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+  <body>
+    error=<span th:text="${error}"></span><br />
+    error_description=<span th:text="${error_description}"></span><br />
+    error_uri=<span th:text="${error_uri}"></span><br />
+    state=<span th:text="${state}"></span><br />
+    
+    <div th:insert="~{html/footer :: copy}"></div>
+  </body>
+</html>

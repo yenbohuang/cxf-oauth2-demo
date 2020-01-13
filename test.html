@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Welcome</title>
+</head>
+<body>
+
+	http://localhost:8080: <a href="http://localhost:8080/oauth2/logout"  target="logoutTab">logout</a>
+	<ol>
+	 	<li>Get authorization code
+			<form action="http://localhost:8080/oauth2/authorize" method="get"
+				target="getAuthorizationCodeTab">
+				client_id = <input type="text" name="client_id" size="64"
+					value="ee287bc1-1bd3-4ffd-a11e-9d3c312dfc81" /><br />
+				<input type="hidden" name="response_type" value="code" />
+				<input type="hidden" name="redirect_uri" value="https://www.getpostman.com/oauth2/callback" />
+				<input type="submit" />
+			</form>
+	    </li>
+	 	<li>Get access token by authorization code (logout before testing it)
+	 		<form action="http://localhost:8080/oauth2/token" method="post"
+	 			target="getAccessCodeByAuthorizationCodeTab">
+	 			code = <input type="text" name="code" size="64" /><br />
+	 			client_id = <input type="text" name="client_id" size="64"
+	 				value="ee287bc1-1bd3-4ffd-a11e-9d3c312dfc81" /><br />
+	 			client_secret = <input type="text" name="client_secret" size="64" value="9d3c312dfc81" /><br />
+				<input type="hidden" name="grant_type" value="authorization_code" />
+	 			<input type="hidden" name="redirect_uri" value="https://www.getpostman.com/oauth2/callback" />
+	 			<input type="submit" />
+			</form>
+	 	</li>
+	 	<li>Get access token by refresh token (logout before testing it)
+	 		<form action="http://localhost:8080/oauth2/token" method="post"
+	 			target="getAccessCodeByRefreshTokenTab">
+	 			refresh_token = <input type="text" name="refresh_token" size="64" /><br />
+	 			client_id = <input type="text" name="client_id" size="64"
+	 				value="ee287bc1-1bd3-4ffd-a11e-9d3c312dfc81" /><br />
+	 			client_secret = <input type="text" name="client_secret" size="64" value="9d3c312dfc81" /><br />
+				<input type="hidden" name="grant_type" value="refresh_token" />
+	 			<input type="submit" />
+			</form>
+	 	</li>
+	</ol>
+</body>
+</html>

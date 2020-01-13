@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Welcome</title>
+</head>
+<body>
+	The followings are normal test cases:
+	<ol>
+		<li><a href="http://localhost:8080/static/file.txt" target="staticFileDemoTab">
+			Display static file</a></li>
+		<li><a href="http://localhost:8080" target="indexDemoTab">
+			Display "index.html" after login</a></li>
+	 	<li><a href="http://localhost:8080/api/demo" target="apiDemoTab">
+	 		Access unprotected resource</a></li>
+	 	<li><a href="http://localhost:8080/secured/secret" target="secretDemoTab">
+	 		Access protected resource</a></li>
+	 	<li><a href="http://localhost:8080/oauth2/authorize?response_type=code&client_id=78fa6a41-aec6-4690-9237-7cd6bb6e1a84&redirect_uri=http%3A%2F%2Flocalhost%2Funknown&scope=demo1%20demo2&state=1234"
+	 			target="getAuthorizationCodeTab">
+	 		Get authorization code</a></li>
+	 	<li>Get access token by authorization code (logout before testing it)
+	 		<form action="http://localhost:8080/oauth2/token" method="post" target="getAccessCodeByAuthorizationCodeTab">
+	 			Authorization code = <input type="text" name="code" size="64" />
+	 			<input type="hidden" name="grant_type" value="authorization_code" />
+	 			<input type="hidden" name="client_id" value="78fa6a41-aec6-4690-9237-7cd6bb6e1a84" />
+	 			<input type="hidden" name="client_secret" value="7cd6bb6e1a84" />
+	 			<input type="hidden" name="redirect_uri" value="http://localhost/unknown" />
+	 			<input type="submit" />
+			</form>
+	 	</li>
+	 	<li>Get access token by refresh token (logout before testing it)
+	 		<form action="http://localhost:8080/oauth2/token" method="post" target="getAccessCodeByRefreshTokenTab">
+	 			Refresh token = <input type="text" name="refresh_token" size="64" />
+	 			<input type="hidden" name="grant_type" value="refresh_token" />
+	 			<input type="hidden" name="client_id" value="78fa6a41-aec6-4690-9237-7cd6bb6e1a84" />
+	 			<input type="hidden" name="client_secret" value="7cd6bb6e1a84" />
+	 			<input type="submit" />
+			</form>
+	 	</li>
+	</ol>
+	
+	The followings are error handling cases:
+	<ol>
+		<li><a href="http://localhost:8080/oauth2/authorize" target="oauthErrorTab">
+			Display OAuthError</a></li>
+		<li><a href="http://localhost:8080/oauth2/authorize?response_type=code&client_id=78fa6a41-aec6-4690-9237-7cd6bb6e1a84&redirect_uri=http%3A%2F%2Flocalhost%2Funknown&scope=unknownScope%20demo2&state=1234"
+	 			target="getAuthorizationCodeTab">
+	 		Get authorization code with unexpected scope</a></li>
+	</ol>
+</body>
+</html>

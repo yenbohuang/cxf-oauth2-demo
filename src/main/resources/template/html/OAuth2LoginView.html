@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title th:text="#{headline}"></title>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="/static/js/jquery-cookie/jquery.cookie-1.4.1.min.js"></script>
+	</head>
+	<body>
+	
+		<h1 th:text="${appName}"></h1>
+		<span th:if="${isError}" th:text="#{login.error}" style="color:red"></span>
+		<span th:if="${isLogout}" th:text="#{login.logout}" style="color:green"></span>
+		
+		<form id="frmLogin" action="/oauth2/login" method="POST">
+			<span th:text="#{login.username}"></span><input type="text" id="username" name="username"><br />
+			<span th:text="#{login.password}"></span><input type="password" id="password" name="password" /><br />
+			<input type="hidden" id="csrfToken" name="_csrf" />
+			<input type="button" id="loginBtn" th:value="#{login.login}"/>
+		</form>
+		
+		<div th:insert="~{html/footer :: copy}"></div>
+		
+		<script type="text/javascript">
+		
+		$(document).ready(function(){
+			
+			$("#username").focus();
+			$("#csrfToken").val($.cookie("XSRF-TOKEN"));
+			
+			$("#loginBtn").click(function() {
+				$("#frmLogin").submit();
+			});
+		});
+		</script>
+	</body>
+</html>

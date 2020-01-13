@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="#{headline}"></title>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/static/js/jquery-cookie/jquery.cookie-1.4.1.min.js"></script>
+  </head>
+  <body>
+  
+  	<h1 th:text="#{hello.user(${endUserName})}"></h1>
+  	<h2 th:text="${appName}"></h2>
+  	<h3 th:text="${appDescription}"></h3>
+  	<ol>
+  		<li th:each="description : ${scopeDescriptions}" th:text="${description}"></li>
+  	</ol>
+    
+  	<form id="decisionForm" th:action="@{${replyTo}}" method="post">
+  		
+  		<input type="hidden" name="response_type" id="response_type" th:value="${response_type}" />
+  		<input type="hidden" name="client_id" id="client_id" th:value="${client_id}" />
+  		<input type="hidden" name="redirect_uri" id="redirect_uri" th:value="${redirect_uri}" />
+  		<input type="hidden" name="scope" id="scope" th:value="${scope}" />
+  		<input type="hidden" name="state" id="state" th:value="${state}" />
+  		<input type="hidden" name="session_authenticity_token" id="session_authenticity_token"
+  			th:value="${session_authenticity_token}" />
+  		<input type="hidden" id="csrfTokenForDecision" name="_csrf" />
+  		<input type="hidden" id="oauthDecision" name="oauthDecision" />
+  		
+  		<input type="button" id="allowButton" th:value="#{oauthDecision.allow}" />
+  		<input type="button" id="denyButton" th:value="#{oauthDecision.deny}" />
+  	</form>
+  	
+  	<form id="logoutForm" action="/oauth2/logout" method="post">
+  		<input type="hidden" id="csrfTokenForLogout" name="_csrf" />
+  		<input type="button" id="logoutButton" th:value="#{oauthDecision.logout}" />
+  	</form>
+  	
+  	<div th:insert="~{html/footer :: copy}"></div>
+  	
+  	<script type="text/javascript">
+		
+		$(document).ready(function(){
+			
+			$("#csrfTokenForDecision").val($.cookie("XSRF-TOKEN"));
+			$("#csrfTokenForLogout").val($.cookie("XSRF-TOKEN"));
+			
+			$("#allowButton").click(function() {
+				$("#oauthDecision").val("allow");
+				$("#decisionForm").submit();
+			});
+			
+			$("#denyButton").click(function() {
+				$("#oauthDecision").val("deny");
+				$("#decisionForm").submit();
+			});
+			
+			$("#logoutButton").click(function() {
+				$("#logoutForm").submit();
+			});
+		});
+		</script>
+  </body>
+</html>
