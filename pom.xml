@@ -11,7 +11,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 		<cxf.version>3.4.3</cxf.version>
-		<jetty.version>11.0.14</jetty.version>
+		<jetty.version>11.0.24</jetty.version>
 		<spring.version>5.4.11</spring.version>
 
 	</properties>
