@@ -10,7 +10,7 @@
 		<jdk.version>11</jdk.version>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
-		<cxf.version>3.4.3</cxf.version>
+		<cxf.version>4.1.7</cxf.version>
 		<jetty.version>11.0.24</jetty.version>
 		<spring.version>5.7.13</spring.version>
 
